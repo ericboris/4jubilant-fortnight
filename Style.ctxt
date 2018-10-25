@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Style
+comment0.text=\n\ Store\ the\ possible\ choices\ of\ paragraph\ style\n\n\ @author\ Eric\ Boris\n\ @version\ 10/24/18\n
+comment1.params=type
+comment1.target=Style(java.lang.String)
+comment1.text=\n\ set\ the\ type\ of\ style\n\ \n\ @param\ \ \ type\ \ \ \ \ \ \ \ the\ type\ of\ style\ to\ set\n
+comment2.params=
+comment2.target=java.lang.String\ toString()
+comment2.text=\n\ return\ a\ string\ of\ the\ object\n\ \n\ @return\ \ \ \ \ \ \ \ \ \ \ \ \ \ a\ string\ of\ the\ object\ \ \n
+numComments=3
