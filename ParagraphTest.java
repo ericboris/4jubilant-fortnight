@@ -43,8 +43,8 @@ public class ParagraphTest {
     
     @Test
     public void testSingleConstructor() {
-        Paragraph testP = new Paragraph();
-        assertEquals(Paragraph.DEFAULT_TEXT, testP.getText());
+        Paragraph testP = new Paragraph("text");
+        assertEquals("text", testP.getText());
         assertEquals(Paragraph.DEFAULT_STYLE, testP.getStyle());
     }
     
