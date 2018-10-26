@@ -2,7 +2,7 @@
 
 import java.util.*;
 
-public class LinkedList<E> implements List<E> {
+public class LinkedList<E> {
     private ListNode<E> front;  // first value in the list
     private ListNode<E> back;   // last value in the list
     private int size;           // current number of elements
@@ -120,10 +120,10 @@ public class LinkedList<E> implements List<E> {
         size = 0;
     }
 
-    // post: returns an iterator for this list
-    public Iterator<E> iterator() {
-        return new LinkedIterator();
-    }
+    // // post: returns an iterator for this list
+    // public Iterator<E> iterator() {
+        // return new LinkedIterator();
+    // }
 
     // pre : 0 <= index < size()
     // post: returns the node at a specific index.  Uses the fact that the list
@@ -171,45 +171,45 @@ public class LinkedList<E> implements List<E> {
         }
     }
 
-    private class LinkedIterator implements Iterator<E> {
-        private ListNode<E> current;  // location of next value to return
-        private boolean removeOK;  // whether it's okay to remove now
+    // private class LinkedIterator implements Iterator<E> {
+        // private ListNode<E> current;  // location of next value to return
+        // private boolean removeOK;  // whether it's okay to remove now
 
-        // post: constructs an iterator for the given list
-        public LinkedIterator() {
-            current = front.next;
-            removeOK = false;
-        }
+        // // post: constructs an iterator for the given list
+        // public LinkedIterator() {
+            // current = front.next;
+            // removeOK = false;
+        // }
 
-        // post: returns true if there are more elements left, false otherwise
-        public boolean hasNext() {
-            return current != back;
-        }
+        // // post: returns true if there are more elements left, false otherwise
+        // public boolean hasNext() {
+            // return current != back;
+        // }
 
-        // pre : hasNext()
-        // post: returns the next element in the iteration
-        public E next() {
-            if (!hasNext()) {
-                throw new NoSuchElementException();
-            }
-            E result = current.data;
-            current = current.next;
-            removeOK = true;
-            return result;
-        }
+        // // pre : hasNext()
+        // // post: returns the next element in the iteration
+        // public E next() {
+            // if (!hasNext()) {
+                // throw new NoSuchElementException();
+            // }
+            // E result = current.data;
+            // current = current.next;
+            // removeOK = true;
+            // return result;
+        // }
 
-        // pre : next() has been called without a call on remove (i.e., at most
-        //       one call per call on next)
-        // post: removes the last element returned by the iterator
-        public void remove() {
-            if (!removeOK) {
-                throw new IllegalStateException();
-            }
-            ListNode<E> prev2 = current.prev.prev;
-            prev2.next = current;
-            current.prev = prev2;
-            size--;
-            removeOK = false;
-        }
-    }
+        // // pre : next() has been called without a call on remove (i.e., at most
+        // //       one call per call on next)
+        // // post: removes the last element returned by the iterator
+        // public void remove() {
+            // if (!removeOK) {
+                // throw new IllegalStateException();
+            // }
+            // ListNode<E> prev2 = current.prev.prev;
+            // prev2.next = current;
+            // current.prev = prev2;
+            // size--;
+            // removeOK = false;
+        // }
+    // }
 }
