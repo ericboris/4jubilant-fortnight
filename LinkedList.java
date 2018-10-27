@@ -1,8 +1,9 @@
 // Class LinkedList<E> can be used to store a list of values of type E.
 
 import java.util.*;
+import java.io.Serializable;
 
-public class LinkedList<E> {
+public class LinkedList<E> implements Serializable {
     private ListNode<E> front;  // first value in the list
     private ListNode<E> back;   // last value in the list
     private int size;           // current number of elements
@@ -153,7 +154,7 @@ public class LinkedList<E> {
         }
     }
 
-    private static class ListNode<E> {
+    private static class ListNode<E> implements Serializable {
         public E data;         // data stored in this node
         public ListNode<E> next;  // link to next node in the list
         public ListNode<E> prev;  // link to previous node in the list

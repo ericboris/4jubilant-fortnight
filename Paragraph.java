@@ -1,10 +1,13 @@
+
+import java.io.Serializable;
+
 /**
  * Store and handle the text of a paragraph
  *
  * @author Eric Boris
  * @version 10/24/18
  */
-public class Paragraph {
+public class Paragraph implements Serializable {
     /** text        the text of the paragraph */
     private String text;
     /** style       the style of the paragraph */

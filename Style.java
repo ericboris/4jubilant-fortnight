@@ -1,3 +1,4 @@
+//import java.io.Serializable;
 
 /**
  * Store the possible choices of paragraph style
@@ -5,8 +6,7 @@
  * @author Eric Boris
  * @version 10/24/18
  */
-public enum Style
-{
+public enum Style{
     /** HEAD1       a first class header */
     HEAD1("h1"), 
     /** HEAD2       a second class header */

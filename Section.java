@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * A titled section that contains any number of paragraphs
  *
  * @author Eric Boris
  * @version 10/26/18
  */
-public class Section {
+public class Section implements Serializable {
     /** name            the name of the section */
     private String name;
     /** paragraphs      the collection of paragraphs in the section */
