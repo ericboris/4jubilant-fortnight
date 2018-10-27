@@ -121,7 +121,7 @@ public class LinkedList<E> implements Serializable {
         size = 0;
     }
 
-    // // post: returns an iterator for this list
+    // post: returns an iterator for this list
     // public Iterator<E> iterator() {
         // return new LinkedIterator();
     // }
