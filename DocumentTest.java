@@ -34,26 +34,26 @@ public class DocumentTest {
     public void tearDown() {
     }
     
-    @Test
-    public void testDefaultInstance() {
-        Document testD = Document.getInstance();
-        assertEquals(Document.DEFAULT_NAME, testD.getName());
-        assertTrue(testD.getSections() instanceof LinkedList);
-    }
-    
-    @Test
-    public void testSingleInstance() {
-        Document testD = Document.getInstance("name 1");
-        testD.setName("name 1");
-        assertEquals("name 1", testD.getName());
-        
-        //assertTrue(testD.getSections() instanceof LinkedList);
-    }
-    
     // @Test
-    // public void testFullInstance() {
-        // Document testD = Document.getInstance("name 1", new LinkedList<Section>());
-        // assertEquals("name 1", testD.getName());
+    // public void testDefaultInstance() {
+        // Document testD = Document.getInstance();
+        // assertEquals(Document.DEFAULT_NAME, testD.getName());
         // assertTrue(testD.getSections() instanceof LinkedList);
     // }
+    
+    // @Test
+    // public void testSingleInstance() {
+        // Document testD = Document.getInstance("name 1");
+        // testD.setName("name 1");
+        // assertEquals("name 1", testD.getName());
+        
+        // //assertTrue(testD.getSections() instanceof LinkedList);
+    // }
+    
+    @Test
+    public void testFullInstance() {
+        Document testD = Document.getInstance("name 1", new LinkedList<Section>());
+        assertEquals("name 1", testD.getName());
+        assertTrue(testD.getSections() instanceof LinkedList);
+    }
 }
