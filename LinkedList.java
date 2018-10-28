@@ -99,16 +99,12 @@ public class LinkedList<E> implements Serializable {
 
     // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)
     // post: removes value at the given index, shifting subsequent values left
-    // modified void to ListNode<E> for move()
-    public E remove(int index) {
+    public void remove(int index) {
         checkIndex(index);
         ListNode<E> current = nodeAt(index - 1);
-        E data = current.next.data;
         current.next = current.next.next;
         current.next.prev = current;
         size--;
-        // modified for move()
-        return data;
     }
 
     // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)
@@ -120,31 +116,17 @@ public class LinkedList<E> implements Serializable {
     }
 
     public void move(int index, int direction) {
+        // check that the current index and the index of placement are valid
         checkIndex(index);
         checkIndex(index + direction);
-        //ListNode<E> current = nodeAt(index);
-        E nodeData = remove(index);
+        
+        // store the current node's data
+        E nodeData = get(index);
+        
+        // delete the node's current location and replace it at the desired
+        // location direction units away from the current index.
+        remove(index);
         add(index + direction, nodeData);
-        //if (direction != 0 && checkIndex(index + direction)) {
-       
-            
-        //}
-            // ListNode<E> curNext = nodeAt(index + 1);
-            // current.next = curNext.next;
-            // curNext.prev = current.prev;
-            // current.prev = curNext;
-            // curNext.next = current;
-            // move(index + 1, direction - 1);
-        // } else if (direction < 0  && checkIndex(index - direction)) {
-            // E n = remove(index);
-            // add(index + direction, n);
-            // ListNode<E> curPrev = nodeAt(index - 1);
-            // current.prev = curPrev.prev;
-            // curPrev.next = current.next;
-            // current.next = curPrev;
-            // curPrev.prev = current;
-            // move(index - 1, direction + 1);
-        //}
     }
     
     // post: list is empty
