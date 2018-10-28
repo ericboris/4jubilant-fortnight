@@ -3,15 +3,13 @@ import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.DataOutputStream;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
-import java.io.File;
+// import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
-import java.lang.StringBuilder;
-
+// import java.lang.StringBuilder;
 
 /**
  * a titled document that contains any number of sectionss
@@ -160,7 +158,7 @@ public class Document {
         }
         return instance;
     }
-    
+
     /**
      * open an existing document
      * 
@@ -200,7 +198,7 @@ public class Document {
             e.printStackTrace();
         }
     }
-    
+
     public void saveToHtml() {
         StringBuilder sb = new StringBuilder();
         sb.append("<!DOCTYPE html>\n<html>");
@@ -213,40 +211,34 @@ public class Document {
                 Paragraph para = sect.getParagraph(p);
                 switch (para.getStyle()) {
                     case HEAD1: sb.append("\n\t\t<h1>" + para.getText() + "</h1>");
-                        break;
+                    break;
                     case HEAD2: sb.append("\n\t\t<h2>" + para.getText() + "</h2>");
-                        break;
+                    break;
                     case HEAD3: sb.append("\n\t\t<h3>" + para.getText() + "</h3>");
-                        break; 
+                    break; 
                     case HEAD4: sb.append("\n\t\t<h4>" + para.getText() + "</h4>");
-                        break;
+                    break;
                     case LEFT: sb.append("\n\t\t<p align=\"left\">" + para.getText() + "</p>");
-                        break;
+                    break;
                     case RIGHT: sb.append("\n\t\t<p align=\"right\">" + para.getText() + "</p>");
-                        break;   
+                    break;   
                     case CENTER: sb.append("\n\t\t<p align=\"center\">" + para.getText() + "</p>");
-                        break;
+                    break;
                     case BULLET: sb.append("\n\t\t<ul>" + para.getText() + "</ul>");
-                        break;
+                    break;
                     case NUMBERED: sb.append("\n\t\tol>" + para.getText() + "<ol>");
-                        break;
+                    break;
                 }
             }
             sb.append("\n\t\t</section>");
         }
         sb.append("\n</body>");
         sb.append("\n</html>");
-        
+
         String htmlText = sb.toString();
-        
+
         Path path = Paths.get(System.getProperty("user.dir") + "/docs");
         try {
-            // Files.createDirectories(path);
-            // FileOutputStream docFile = new FileOutputStream("docs/" + name + ".html");
-            // DataOutputStream out = new DataOutputStream(docFile);
-            // out.writeUTF(htmlText);
-            // out.close();
-            // docFile.close();
             Files.createDirectories(path);
             FileWriter fw = new FileWriter("docs/" + name +  ".html", true);
             BufferedWriter bw  = new BufferedWriter(fw);
@@ -256,7 +248,7 @@ public class Document {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * return a string form of the document
      * 
