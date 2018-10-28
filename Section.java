@@ -64,12 +64,12 @@ public class Section implements Serializable {
     }
 
     /**
-     * add a paragraph at the front of the section
+     * add a paragraph at the end of the section
      * 
      * @param   paragraph   the paragraph to add
      */
     public void addParagraph(Paragraph paragraph) {
-        addParagraph(0, paragraph);
+        addParagraph(paragraphs.size(), paragraph);
     }
 
     /**
@@ -142,6 +142,10 @@ public class Section implements Serializable {
      * @return              the string form of the section
      */
     public String toString() {
-        return "name :\n\t" + name + "\nparagraphs :\n\t" + getCount();
+        String paras = "";
+        for (int p = 0; p < getCount(); p++) {
+            paras += getParagraph(p).toString() + "\t";
+        }
+        return "\nname :\t" + name + "p:\t" + paras; //+ "\nparagraphs :\n\t" + getCount();
     }
 }

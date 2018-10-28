@@ -2,6 +2,7 @@
 
 import java.util.*;
 import java.io.Serializable;
+import java.lang.Math;
 
 public class LinkedList<E> implements Serializable {
     private ListNode<E> front;  // first value in the list
@@ -98,12 +99,16 @@ public class LinkedList<E> implements Serializable {
 
     // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)
     // post: removes value at the given index, shifting subsequent values left
-    public void remove(int index) {
+    // modified void to ListNode<E> for move()
+    public E remove(int index) {
         checkIndex(index);
         ListNode<E> current = nodeAt(index - 1);
+        E data = current.next.data;
         current.next = current.next.next;
         current.next.prev = current;
         size--;
+        // modified for move()
+        return data;
     }
 
     // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)
@@ -114,6 +119,34 @@ public class LinkedList<E> implements Serializable {
         current.data = value;
     }
 
+    public void move(int index, int direction) {
+        checkIndex(index);
+        checkIndex(index + direction);
+        //ListNode<E> current = nodeAt(index);
+        E nodeData = remove(index);
+        add(index + direction, nodeData);
+        //if (direction != 0 && checkIndex(index + direction)) {
+       
+            
+        //}
+            // ListNode<E> curNext = nodeAt(index + 1);
+            // current.next = curNext.next;
+            // curNext.prev = current.prev;
+            // current.prev = curNext;
+            // curNext.next = current;
+            // move(index + 1, direction - 1);
+        // } else if (direction < 0  && checkIndex(index - direction)) {
+            // E n = remove(index);
+            // add(index + direction, n);
+            // ListNode<E> curPrev = nodeAt(index - 1);
+            // current.prev = curPrev.prev;
+            // curPrev.next = current.next;
+            // current.next = curPrev;
+            // curPrev.prev = current;
+            // move(index - 1, direction + 1);
+        //}
+    }
+    
     // post: list is empty
     public void clear() {
         front.next = back;
@@ -148,10 +181,11 @@ public class LinkedList<E> implements Serializable {
 
     // post: throws an IndexOutOfBoundsException if the given index is
     //       not a legal index of the current list
-    private void checkIndex(int index) {
+    private boolean checkIndex(int index) {
         if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException("index: " + index);
         }
+        return true;
     }
 
     private static class ListNode<E> implements Serializable {

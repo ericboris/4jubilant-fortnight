@@ -74,12 +74,12 @@ public class Document {
     }
 
     /**
-     * add a section at the front of the document
+     * add a section at the end of the document
      * 
      * @param   section   the section to add
      */
     public void addSection(Section section) {
-        addSection(0, section);
+        addSection(sections.size(), section);
     }
 
     /**
@@ -145,7 +145,17 @@ public class Document {
     public int getCount() {
         return sections.size();
     }
-
+    
+    /**
+     * move the section located at index the number of times in direction
+     * 
+     * @param   index       the section index to move
+     * @param   direction   the number of times and direction to move
+     */
+    public void move(int index, int direction) {
+        sections.move(index, direction);
+    }
+    
     /**
      * open a new document
      * 
@@ -204,10 +214,9 @@ public class Document {
         sb.append("<!DOCTYPE html>\n<html>");
         sb.append("\n<head>\n\t<title>" + name + "</title>\n</head>");
         sb.append("\n<body>");
-        for (int s = getCount() - 1; s >= 0; s--) {
+        for (int s = 0; s < getCount(); s++) {
             Section sect = getSection(s);
-            sb.append("\n\t<section class=\"" + sect.getName() + "\">");
-            for (int p = sect.getCount() - 1; p >= 0; p--) {
+            for (int p = 0; p < getSection(s).getCount(); p++) {
                 Paragraph para = sect.getParagraph(p);
                 switch (para.getStyle()) {
                     case HEAD1: sb.append("\n\t\t<h1>" + para.getText() + "</h1>");
@@ -255,6 +264,13 @@ public class Document {
      * @return              the string form of the document
      */
     public String toString() {
-        return "name :\n\t" + name + "\nsections :\n\t" + getCount();
+        String sects = "";
+        for (int s = 0; s < getCount(); s++) {
+            sects += getSection(s).toString() + "\t";
+        }
+        return "name :\n\t" + name + 
+               "\ncount :\n\t" + getCount() +
+               "\nsections : \n\t" + sects;
+               
     }
 }

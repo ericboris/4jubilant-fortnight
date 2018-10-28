@@ -88,6 +88,6 @@ public class Paragraph implements Serializable {
      * return a string of the object
      */
     public String toString() {
-        return "text :\n\t" + text + "\nstyle : \n\t" + style;
+        return "text :\t" + text + "style : \t" + style;
     }
 }
