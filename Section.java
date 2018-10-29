@@ -126,7 +126,7 @@ public class Section implements Serializable {
      * clear the section of all paragraphs
      */
     public void clear() {
-        paragraphs = new LinkedList<Paragraph>();
+        paragraphs.clear();
     }
     
     /**

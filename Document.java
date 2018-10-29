@@ -144,7 +144,7 @@ public class Document {
      * clear the document of all sections
      */
     public void clear() {
-        sections = new LinkedList<Section>();
+        sections.clear();
     }
 
     /**
@@ -303,7 +303,7 @@ public class Document {
      */
     public static void closeDoc() {
         name = null;
-        sections = null;
+        sections.clear();
         instance = null;
         isOpen = false;
     }   
