@@ -47,6 +47,9 @@ public class Document {
      * @return              the document
      */
     private static Document getInstance(String name, LinkedList<Section> sections) {
+        if (name == null || sections == null) {
+            throw new IllegalArgumentException("parameter must not be null");
+        }
         if (instance == null) {
             instance = new Document(name, sections);
         }
@@ -81,6 +84,9 @@ public class Document {
      * @param   section   the section to add
      */
     public void addSection(Section section) {
+        if (section == null) {
+            throw new IllegalArgumentException("section must not be null");
+        }
         addSection(sections.size(), section);
     }
 
@@ -155,6 +161,10 @@ public class Document {
      * @param   direction   the number of times and direction (+, -) to move
      */
     public void move(int index, int direction) {
+        if (index < 0 || index > sections.size() ||
+            index + direction < 0 || index + direction > sections.size()) {
+            throw new IndexOutOfBoundsException("index: " + index);
+        }
         sections.move(index, direction);
     }
     
@@ -284,7 +294,7 @@ public class Document {
         sections = null;
         instance = null;
         isOpen = false;
-    }
+    }   
     
     /**
      * return a string form of the document

@@ -137,6 +137,16 @@ public class Section implements Serializable {
     }
     
     /**
+     * move the section located at index the number of times in direction
+     * 
+     * @param   index       the section index to move
+     * @param   direction   the number of times and direction (+, -) to move
+     */
+    public void move(int index, int direction) {
+        paragraphs.move(index, direction);
+    }
+    
+    /**
      * return a string form of the section
      * 
      * @return              the string form of the section

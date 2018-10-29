@@ -27,32 +27,7 @@ public class Main {
         firstSect.addParagraph(new Paragraph(bulletedText, Style.BULLET)); 
         firstSect.addParagraph(new Paragraph("I hope you have enjoyed our foray into the world of the pygmy hippo..."));
         
-        secndSect.addParagraph(new Paragraph("Now, how about cat facts?"));
-        
-        doc.addSection(firstSect);
-        doc.addSection(secndSect);
-        doc.addSection(thirdSect);
-        doc.addSection(forthSect);
-        
-        doc.move(0, 0);
-        System.out.println("0,0" + doc.toString());
-        doc.move(0, 1);
-        System.out.println("0,1" + doc.toString());
-        doc.move(0, 2);
-        System.out.println("0,2" + doc.toString());
-        doc.move(0, 3);
-        System.out.println("0,3" + doc.toString());
-        doc.move(1, -1);
-        System.out.println("1,-1" + doc.toString());
-        doc.move(1, 1);
-        System.out.println("1,1" + doc.toString());
-        doc.move(1, 2);
-        System.out.println("1,2" + doc.toString());
-        doc.move(2, -2);
-        System.out.println("2,-2" + doc.toString());
-        doc.move(2, -1);
-        System.out.println("2,1" + doc.toString());
-        doc.move(2, 1);        
+        secndSect.addParagraph(new Paragraph("Now, how about cat facts?"));        
         
         doc.saveDoc();
         doc.saveHtml();
