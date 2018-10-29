@@ -4,12 +4,24 @@ import java.util.*;
 import java.io.Serializable;
 import java.lang.Math;
 
+/**
+ * A generic linked list
+ * 
+ * @author Reges & Stepp updated by Eric Boris
+ * @version 10/27/18
+ */
 public class LinkedList<E> implements Serializable {
+    /** front       first value in the list */
     private ListNode<E> front;  // first value in the list
+    /** back        last value in the list */
     private ListNode<E> back;   // last value in the list
+    /** size        current number of elements */
     private int size;           // current number of elements
 
     // post: constructs an empty list
+    /** 
+     * create a list
+     */
     public LinkedList() {
         front = new ListNode<E>(null);
         back = new ListNode<E>(null);
@@ -17,12 +29,23 @@ public class LinkedList<E> implements Serializable {
     }
 
     // post: returns the current number of elements in the list
+    /**
+     * return the size of the list
+     * 
+     * @return              the size of the list
+     */
     public int size() {
         return size;
     }
 
     // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)
     // post: returns the value at the given index in the list
+    /**
+     * return the value at the given index in the list
+     * 
+     * @param   index       the index of the list
+     * @return              the value at the index
+     */
     public E get(int index) {
         checkIndex(index);
         ListNode<E> current = nodeAt(index);
@@ -30,6 +53,11 @@ public class LinkedList<E> implements Serializable {
     }
 
     // post: creates a comma-separated, bracketed version of the list
+    /**
+     * creates a comma-separated, bracked version of the list
+     * 
+     * @return              a string version of the list
+     */
     public String toString() {
         if (size == 0) {
             return "[]";
@@ -47,6 +75,12 @@ public class LinkedList<E> implements Serializable {
 
     // post : returns the position of the first occurrence of the given
     //        value (-1 if not found)
+    /**
+     * return the position of the first occurrence of the given value
+     * 
+     * @param   value       the value to look for
+     * @return              the first position of the value
+     */
     public int indexOf(E value) {
         int index = 0;
         ListNode<E> current = front.next;
@@ -61,17 +95,33 @@ public class LinkedList<E> implements Serializable {
     }
 
     // post: returns true if list is empty, false otherwise
+    /**
+     * returns if the list is empty or not
+     * 
+     * @return              true if list is empty, false otherwise
+     */
     public boolean isEmpty() {
         return size == 0;
     }
 
     // post: returns true if the given value is contained in the list,
     //       false otherwise
+    /**
+     * returns if list contains given value
+     * 
+     * @param   value       the value to check for
+     * @return              true if value is in list, false otherwise
+     */
     public boolean contains(E value) {
         return indexOf(value) >= 0;
     }
 
     // post: appends the given value to the end of the list
+    /**
+     * append the given value to the end of the list
+     * 
+     * @param   value       the value to append
+     */
     public void add(E value) {
         add(size, value);
     }
@@ -79,6 +129,12 @@ public class LinkedList<E> implements Serializable {
     // pre: 0 <= index <= size() (throws IndexOutOfBoundsException if not)
     // post: inserts the given value at the given index, shifting subsequent
     //       values right
+    /**
+     * add a new value at the given index
+     * 
+     * @param   index       the position to add the value
+     * @param   value       the value to add
+     */
     public void add(int index, E value) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("index: " + index);
@@ -91,6 +147,11 @@ public class LinkedList<E> implements Serializable {
     }
 
     // post: appends all values in the given list to the end of this list
+    /**
+     * append a list onto this list
+     * 
+     * @param   other       the list to add to this list
+     */
     public void addAll(List<E> other) {
         for (E value: other) {
             add(value);
@@ -99,6 +160,11 @@ public class LinkedList<E> implements Serializable {
 
     // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)
     // post: removes value at the given index, shifting subsequent values left
+    /**
+     * remove the value at the given index
+     * 
+     * @param   index       the index to remove
+     */
     public void remove(int index) {
         checkIndex(index);
         ListNode<E> current = nodeAt(index - 1);
@@ -109,12 +175,24 @@ public class LinkedList<E> implements Serializable {
 
     // pre : 0 <= index < size() (throws IndexOutOfBoundsException if not)
     // post: replaces the value at the given index with the given value
+    /**
+     * replace the value at the given index with the given value
+     * 
+     * @param   index       the position to replace
+     * @param   value       the value to replace at index
+     */
     public void set(int index, E value) {
         checkIndex(index);
         ListNode<E> current = nodeAt(index);
         current.data = value;
     }
 
+    /**
+     * move the value at the given index in the direction and amount specified
+     * 
+     * @param   index       the the index value to move
+     * @param   direction   the direction (+ or -) and amount to move
+     */
     public void move(int index, int direction) {
         // check that the current index and the index of placement are valid
         checkIndex(index);
@@ -130,6 +208,9 @@ public class LinkedList<E> implements Serializable {
     }
     
     // post: list is empty
+    /**
+     * clear the list
+     */
     public void clear() {
         front.next = back;
         back.prev = front;
@@ -145,6 +226,11 @@ public class LinkedList<E> implements Serializable {
     // post: returns the node at a specific index.  Uses the fact that the list
     //       is doubly-linked to start from the front or the back, whichever
     //       is closer.
+    /**
+     * get the node a the given index
+     * 
+     * @param   index       the index of the node to return
+     */
     private ListNode<E> nodeAt(int index) {
         ListNode<E> current;
         if (index < size / 2) {
@@ -163,6 +249,12 @@ public class LinkedList<E> implements Serializable {
 
     // post: throws an IndexOutOfBoundsException if the given index is
     //       not a legal index of the current list
+    /**
+     * ensure provided index is valid
+     * 
+     * @param   index       the index to check
+     * @return              nothing if return is invalid, true otherwise
+     */
     private boolean checkIndex(int index) {
         if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException("index: " + index);
@@ -170,17 +262,32 @@ public class LinkedList<E> implements Serializable {
         return true;
     }
 
+    /**
+     * a node of the linked list
+     */
     private static class ListNode<E> implements Serializable {
         public E data;         // data stored in this node
         public ListNode<E> next;  // link to next node in the list
         public ListNode<E> prev;  // link to previous node in the list
 
         // post: constructs a node with given data and null links
+        /**
+         * create a new node with given data
+         * 
+         * @param   data        the data in the node
+         */
         public ListNode(E data) {
             this(data, null, null);
         }
 
         // post: constructs a node with given data and given links
+        /**
+         * create a node with given data and and a particular location in list
+         * 
+         * @param   data        the data in the node
+         * @param   next        the element after this new node
+         * @param   prev        the element before this new node
+         */
         public ListNode(E data, ListNode<E> next, ListNode<E> prev) {
             this.data = data;
             this.next = next;
