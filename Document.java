@@ -257,10 +257,22 @@ public class Document {
                     break;   
                     case CENTER: sb.append("\n\t\t<p align=\"center\">" + para.getText() + "</p>");
                     break;
-                    case BULLET: sb.append("\n\t\t<ul>" + para.getText() + "</ul>");
-                    break;
-                    case NUMBERED: sb.append("\n\t\tol>" + para.getText() + "<ol>");
-                    break;
+                    case BULLET: 
+                        sb.append("\n\t\t<ul>"); 
+                        String[] ulSplit = para.getText().split("\n");
+                        for (String li : ulSplit) {
+                            sb.append("\n\t\t\t<li>" + li + "</li>");
+                        }
+                        sb.append("</ul>");
+                        break;
+                    case NUMBERED:
+                        sb.append("\n\t\t<ol>"); 
+                        String[] olSplit = para.getText().split("\n");
+                        for (String li : olSplit) {
+                            sb.append("\n\t\t\t<li>" + li + "</li>");
+                        }
+                        sb.append("</ol>");
+                        break;
                 }
             }
             sb.append("\n\t\t</section>");

@@ -7,12 +7,9 @@
  */
 public class Main {
     public static void main(String[] args) {
-        Document doc = Document.newDoc("Hippos");
+        Document doc = Document.newDoc("Animals");
         
-        Section firstSect = new Section("section1");
-        Section secndSect = new Section("section2");
-        Section thirdSect = new Section("section3");
-        Section forthSect = new Section("section4");
+        Section firstSect = new Section("Hippos");
         
         firstSect.addParagraph(new Paragraph("Pygmy Hippos of Africa", Style.HEAD1));
         firstSect.addParagraph(new Paragraph("While the hippopotamus exists in various places in Africa..."));
@@ -27,7 +24,25 @@ public class Main {
         firstSect.addParagraph(new Paragraph(bulletedText, Style.BULLET)); 
         firstSect.addParagraph(new Paragraph("I hope you have enjoyed our foray into the world of the pygmy hippo..."));
         
-        secndSect.addParagraph(new Paragraph("Now, how about cat facts?"));        
+        Section secondSect = new Section("Cats");
+
+        secondSect.addParagraph(new Paragraph("Domestic cats", Style.HEAD1));
+        secondSect.addParagraph(new Paragraph("The cat is a furry, carnivorous mammal..."));
+        secondSect.addParagraph(new Paragraph("Cat facts:"));
+        
+        String numberedText = "";
+        numberedText += "Cats have been domesticated for around 4,000 years. \n";
+        numberedText += "While not well known, the collective nouns used for cats and kittens are a clowder of cats and a kindle of kittens. \n";
+        numberedText += "More cats are left-pawed than right. \n";
+        numberedText += "The largest breed of cat in Australia is the Maine Coon. Males can regularly weigh up to 12kgs! \n";
+        
+        secondSect.addParagraph(new Paragraph(numberedText, Style.NUMBERED));
+        secondSect.addParagraph(new Paragraph("That's all for cats..."));
+        
+        doc.addSection(firstSect);
+        doc.addSection(secondSect);
+        
+        doc.move(0, 1);
         
         doc.saveDoc();
         doc.saveHtml();
