@@ -55,6 +55,6 @@ public class Main {
         doc.move(2, 1);        
         
         doc.saveDoc();
-        doc.saveToHtml();
+        doc.saveHtml();
     }
 }

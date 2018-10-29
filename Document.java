@@ -5,11 +5,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
-// import java.io.File;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
-// import java.lang.StringBuilder;
 
 /**
  * a titled document that contains any number of sectionss
@@ -21,12 +20,14 @@ public class Document {
     /** instance        the single document instance */
     private static Document instance;
     /** name            the name of the document */
-    private String name;
+    private static String name;
     /** sections        the sections of the document */
-    private LinkedList<Section> sections;
+    private static LinkedList<Section> sections;
+    /** isOpen          is the file open or closed */
+    private static boolean isOpen;
     /** DEFAULT_NAME    the default name of the document */
     public static final String DEFAULT_NAME = "";
-
+    
     /**
      * create a new document instance
      * 
@@ -45,10 +46,11 @@ public class Document {
      * @param   sections    the sections of the document
      * @return              the document
      */
-    public static Document getInstance(String name, LinkedList<Section> sections) {
+    private static Document getInstance(String name, LinkedList<Section> sections) {
         if (instance == null) {
             instance = new Document(name, sections);
         }
+        isOpen = true;
         return instance;
     }
 
@@ -150,7 +152,7 @@ public class Document {
      * move the section located at index the number of times in direction
      * 
      * @param   index       the section index to move
-     * @param   direction   the number of times and direction to move
+     * @param   direction   the number of times and direction (+, -) to move
      */
     public void move(int index, int direction) {
         sections.move(index, direction);
@@ -163,10 +165,13 @@ public class Document {
      * @return              the document
      */
     public static Document newDoc(String name) {
-        if (instance == null) {
-            instance = new Document(name, new LinkedList<Section>()); 
+        if (isOpen) {
+            throw new IllegalArgumentException("document is already open");
         }
-        return instance;
+        if (name == null) {
+            throw new IllegalArgumentException("name must not be null");
+        }
+        return getInstance(name, new LinkedList<Section>());
     }
 
     /**
@@ -176,14 +181,16 @@ public class Document {
      * @return              the document
      */
     public static Document openDoc(String name) {
+        if (isOpen) {
+            throw new IllegalArgumentException("document is already open");
+        }
         if (name == null) {
             throw new IllegalArgumentException("name must not be null");
         }
         try {
-
-            FileInputStream fis = new FileInputStream("docs/" + name);
+            FileInputStream fis = new FileInputStream("docs/" + name + ".wpd");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            instance = new Document(name, (LinkedList<Section>) ois.readObject());
+            instance = getInstance(name, (LinkedList<Section>) ois.readObject());
             ois.close();
             fis.close();
         } catch (ClassNotFoundException | IOException e) {
@@ -193,11 +200,15 @@ public class Document {
     }
 
     /**
-     * save the current document instance
+     * save the current document instance to a file of the same name
      */
     public void saveDoc() {
         Path path = Paths.get(System.getProperty("user.dir") + "/docs");
         try {
+            File file = new File("docs/" + name + ".wpd");
+            if (file.exists()) {
+                file.delete();
+            }
             Files.createDirectories(path);
             FileOutputStream docFile = new FileOutputStream("docs/" + name + ".wpd");
             ObjectOutputStream out = new ObjectOutputStream(docFile);
@@ -209,7 +220,10 @@ public class Document {
         }
     }
 
-    public void saveToHtml() {
+    /**
+     * save the open document to an html file of the same name
+     */
+    public void saveHtml() {
         StringBuilder sb = new StringBuilder();
         sb.append("<!DOCTYPE html>\n<html>");
         sb.append("\n<head>\n\t<title>" + name + "</title>\n</head>");
@@ -247,7 +261,11 @@ public class Document {
         String htmlText = sb.toString();
 
         Path path = Paths.get(System.getProperty("user.dir") + "/docs");
-        try {
+        try {      
+            File file = new File("docs/" + name + ".html");
+            if (file.exists()) {
+                file.delete();
+            }
             Files.createDirectories(path);
             FileWriter fw = new FileWriter("docs/" + name +  ".html", true);
             BufferedWriter bw  = new BufferedWriter(fw);
@@ -258,6 +276,16 @@ public class Document {
         }
     }
 
+    /**
+     * close the open document
+     */
+    public static void closeDoc() {
+        name = null;
+        sections = null;
+        instance = null;
+        isOpen = false;
+    }
+    
     /**
      * return a string form of the document
      * 
