@@ -175,7 +175,6 @@ public class Document {
     * @param   name        the name of the document to open
     * @return              the document
     */
-    @SuppressWarnings("unchecked") 
     public void openDoc(String name) {
         if (name == null) {
             throw new IllegalArgumentException("name must not be null");
@@ -184,7 +183,8 @@ public class Document {
             FileInputStream fis = new FileInputStream("docs/" + name + ".wpd");
             ObjectInputStream ois = new ObjectInputStream(fis);
             this.name = name;
-            this.sections = (LinkedList<Section>) ois.readObject();
+            @SuppressWarnings("unchecked") LinkedList<Section> sects = (LinkedList<Section>) ois.readObject();
+            this.sections = sects;
             ois.close();
             fis.close();
         } catch (ClassNotFoundException | IOException e) {
