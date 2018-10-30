@@ -12,7 +12,8 @@ public class Main {
      *  @param  args        the optional commandline arguments
      */
     public static void main(String[] args) {
-        Document doc = Document.newDoc("Animals");
+        //Document doc = Document.newDoc("Animals");
+        Document doc = Document.getInstance();        
         
         Section firstSect = new Section("Hippos");
         

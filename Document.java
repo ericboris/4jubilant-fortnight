@@ -1,4 +1,4 @@
-    import java.io.IOException;
+import java.io.IOException;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
@@ -23,10 +23,10 @@ public class Document {
     private static String name;
     /** sections        the sections of the document */
     private static LinkedList<Section> sections;
-    /** isOpen          is the file open or closed */
-    private static boolean isOpen;
+    // /** isOpen          is the file open or closed */
+    // private static boolean isOpen;
     /** DEFAULT_NAME    the default name of the document */
-    public static final String DEFAULT_NAME = "";
+    public static final String DEFAULT_NAME = "document";
 
     /**
      * create a new document instance
@@ -34,9 +34,10 @@ public class Document {
      * @param   name        the name of the document
      * @param   sections    the sections of the document
      */
-    private Document(String name, LinkedList<Section> sections) {
-        setName(name);
-        this.sections = sections;
+    //private Document(String name, LinkedList<Section> sections) {
+    private Document() {
+        setName(DEFAULT_NAME);
+        this.sections = new LinkedList<Section>();
     }
 
     /**
@@ -46,14 +47,20 @@ public class Document {
      * @param   sections    the sections of the document
      * @return              the document
      */
-    private static Document getInstance(String name, LinkedList<Section> sections) {
-        if (name == null || sections == null) {
-            throw new IllegalArgumentException("parameter must not be null");
-        }
+    // private static Document getInstance(String name, LinkedList<Section> sections) {
+        // if (name == null || sections == null) {
+            // throw new IllegalArgumentException("parameter must not be null");
+        // }
+        // if (instance == null) {
+            // instance = new Document(name, sections);
+        // }
+        // isOpen = true;
+        // return instance;
+    // }
+    public static Document getInstance() {
         if (instance == null) {
-            instance = new Document(name, sections);
+            instance = new Document() ;
         }
-        isOpen = true;
         return instance;
     }
 
@@ -167,14 +174,22 @@ public class Document {
      * @param   name        the name of the document
      * @return              the document
      */
-    public static Document newDoc(String name) {
-        if (isOpen) {
-            throw new IllegalArgumentException("document is already open");
-        }
+    // public static Document newDoc(String name) {
+        // if (isOpen) {
+            // throw new IllegalArgumentException("document is already open");
+        // }
+        // if (name == null) {
+            // throw new IllegalArgumentException("name must not be null");
+        // }
+        // return getInstance(name, new LinkedList<Section>());
+    // }
+    public void newDoc(String name) {
         if (name == null) {
             throw new IllegalArgumentException("name must not be null");
         }
-        return getInstance(name, new LinkedList<Section>());
+        //closeDoc();
+        this.name = name;
+        sections = new LinkedList<Section>();
     }
 
     /**
@@ -183,26 +198,58 @@ public class Document {
      * @param   name        the name of the document to open
      * @return              the document
      */
-    // @SuppressWarnings("unchecked") 
-    public static Document openDoc(String name) {
-        if (isOpen) {
-            throw new IllegalArgumentException("document is already open");
-        }
+    // public static Document openDoc(String name) {
+        // if (isOpen) {
+            // throw new IllegalArgumentException("document is already open");
+        // }
+        // if (name == null) {
+            // throw new IllegalArgumentException("name must not be null");
+        // }
+        // try {
+            // FileInputStream fis = new FileInputStream("docs/" + name + ".wpd");
+            // ObjectInputStream ois = new ObjectInputStream(fis);
+            // instance = (Document) getInstance(name, (LinkedList<Section>) ois.readObject());
+            // ois.close();
+            // fis.close();
+        // } catch (ClassNotFoundException | IOException e) {
+            // e.printStackTrace();
+        // }
+        // return instance;
+    // }
+    @SuppressWarnings("unchecked") 
+    public void openDoc(String name) {
+        // if (isOpen) {
+            // throw new IllegalArgumentException("document is already open");
+        // }
         if (name == null) {
             throw new IllegalArgumentException("name must not be null");
         }
         try {
             FileInputStream fis = new FileInputStream("docs/" + name + ".wpd");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            instance = (Document) getInstance(name, (LinkedList<Section>) ois.readObject());
+            //closeDoc();
+            //this.name = name;
+            //instance = (Document) ois.readObject();
+            //instance = (Document) getInstance(name, (LinkedList<Section>) ois.readObject());
+            this.name = name;
+            this.sections = (LinkedList<Section>) ois.readObject();
             ois.close();
             fis.close();
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
-        return instance;
     }
 
+    /**
+     * close the open document
+     */
+    public void closeDoc() {
+        clear();
+        name = null;
+        instance = null;
+        //isOpen = false;
+    }   
+    
     /**
      * save the current document instance to a file of the same name
      */
@@ -291,16 +338,6 @@ public class Document {
             e.printStackTrace();
         }
     }
-
-    /**
-     * close the open document
-     */
-    public static void closeDoc() {
-        name = null;
-        sections.clear();
-        instance = null;
-        isOpen = false;
-    }   
 
     /**
      * return a string form of the document

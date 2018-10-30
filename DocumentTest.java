@@ -25,7 +25,7 @@ public class DocumentTest {
      */
     @Before
     public void setUp() {
-        testD = Document.newDoc("testD");
+        testD = Document.getInstance();
     }
 
     /**
@@ -162,8 +162,8 @@ public class DocumentTest {
         testD.addSection(new Section("section1"));
         testD.saveDoc();
         testD.closeDoc();
-        Document testD2 = Document.openDoc("testD");
-        assertEquals("section1", testD2.getSection(0).getName());
+        testD.openDoc("testD");
+        assertEquals("section1", testD.getSection(0).getName());
     }
     
     @Test
