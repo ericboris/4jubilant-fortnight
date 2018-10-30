@@ -88,6 +88,11 @@ public class Paragraph implements Serializable {
      * return a string of the object
      */
     public String toString() {
-        return "text :\t" + text + "style : \t" + style;
+        String txt = "\t";
+        String[] splitText = text.split("\n");
+        for (String t : splitText) {
+            txt += t + "\n\t\t";
+        }
+        return style + txt;
     }
 }

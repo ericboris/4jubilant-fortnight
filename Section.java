@@ -145,10 +145,10 @@ public class Section implements Serializable {
      * @return              the string form of the section
      */
     public String toString() {
-        String paras = "";
+        String paras = "\n\t";
         for (int p = 0; p < getCount(); p++) {
-            paras += getParagraph(p).toString() + "\t";
+            paras += "\n\t" + getParagraph(p).toString();
         }
-        return "\nname :\t" + name + "p:\t" + paras; //+ "\nparagraphs :\n\t" + getCount();
+        return name + paras; //+ "\nparagraphs :\n\t" + getCount();
     }
 }
