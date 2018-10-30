@@ -16,6 +16,10 @@ public class DocumentTest {
      * Default constructor for test class DocumentTest
      */
     public DocumentTest() {
+        testD = Document.getInstance();
+        testD.setName("testD");
+        testD.saveDoc();
+        testD.openDoc("testD");
     }
 
     /**
@@ -25,7 +29,8 @@ public class DocumentTest {
      */
     @Before
     public void setUp() {
-        testD = Document.getInstance();
+        testD.closeDoc();
+        testD.openDoc("testD");
     }
 
     /**
@@ -56,6 +61,7 @@ public class DocumentTest {
 
     @Test
     public void testAddAndGetSection() {
+        
         testD.addSection(new Section("section1"));
         assertEquals("section1", testD.getSection(0).getName());
     }
@@ -179,9 +185,11 @@ public class DocumentTest {
         assertEquals(null, testD.getName());
     }
     
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void testDocAlreadyOpenNewDoc() {
         testD.newDoc("testD");
+        assertEquals("testD", testD.getName());
+        assertEquals(0, testD.getCount());
     }
     
     @Test (expected = IllegalArgumentException.class)
@@ -190,9 +198,11 @@ public class DocumentTest {
         testD.newDoc(null);
     }
     
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void testDocAlreadyOpenOpenDoc() {
+        testD.closeDoc();
         testD.openDoc("testD");
+        assertEquals("testD", testD.getName());
     }
     
     @Test (expected = IllegalArgumentException.class)

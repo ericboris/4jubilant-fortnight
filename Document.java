@@ -28,9 +28,6 @@ public class Document {
 
     /**
      * create a new document instance
-     * 
-     * @param   name        the name of the document
-     * @param   sections    the sections of the document
      */
     private Document() {
         setName(DEFAULT_NAME);
@@ -40,9 +37,7 @@ public class Document {
     /**
      * return an instance of the document
      * 
-     * @param   name        the name of the document
-     * @param   sections    the sections of the document
-     * @return              the document
+     * @return              an instance of the document
      */
     public static Document getInstance() {
         if (instance == null) {
@@ -159,7 +154,6 @@ public class Document {
      * open a new document
      * 
      * @param   name        the name of the document
-     * @return              the document
      */
     public void newDoc(String name) {
         if (name == null) {
@@ -173,7 +167,6 @@ public class Document {
     * open an existing document
     * 
     * @param   name        the name of the document to open
-    * @return              the document
     */
     public void openDoc(String name) {
         if (name == null) {
