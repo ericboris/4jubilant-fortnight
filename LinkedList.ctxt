@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=LinkedList
-comment0.text=\n\ A\ generic\ linked\ list\n\ \n\ @author\ Reges\ &\ Stepp\ updated\ by\ Eric\ Boris\n\ @version\ 10/27/18\n
+comment0.text=\n\ A\ generic\ linked\ list\n\ \n\ @author\ Reges\ and\ Stepp\ updated\ by\ Eric\ Boris\n\ @version\ 10/27/18\n
 comment1.params=
 comment1.target=LinkedList()
 comment1.text=\ \n\ create\ a\ list\n
@@ -21,7 +21,7 @@ comment14.target=void\ clear()
 comment14.text=\n\ clear\ the\ list\n
 comment15.params=index
 comment15.target=LinkedList.ListNode\ nodeAt(int)
-comment15.text=\n\ get\ the\ node\ a\ the\ given\ index\n\ \n\ @param\ \ \ index\ \ \ \ \ \ \ the\ index\ of\ the\ node\ to\ return\n
+comment15.text=\n\ get\ the\ node\ a\ the\ given\ index\n\ \n\ @param\ \ \ index\ \ \ \ \ \ \ the\ index\ of\ the\ node\ to\ return\n\ @return\ \ \ \ \ \ \ \ \ \ \ \ \ \ the\ node\ at\ index\n
 comment16.params=index
 comment16.target=boolean\ checkIndex(int)
 comment16.text=\n\ ensure\ provided\ index\ is\ valid\n\ \n\ @param\ \ \ index\ \ \ \ \ \ \ the\ index\ to\ check\n\ @return\ \ \ \ \ \ \ \ \ \ \ \ \ \ nothing\ if\ return\ is\ invalid,\ true\ otherwise\n

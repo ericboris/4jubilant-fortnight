@@ -7,7 +7,7 @@ import java.lang.Math;
 /**
  * A generic linked list
  * 
- * @author Reges & Stepp updated by Eric Boris
+ * @author Reges and Stepp updated by Eric Boris
  * @version 10/27/18
  */
 public class LinkedList<E> implements Serializable {
@@ -230,6 +230,7 @@ public class LinkedList<E> implements Serializable {
      * get the node a the given index
      * 
      * @param   index       the index of the node to return
+     * @return              the node at index
      */
     private ListNode<E> nodeAt(int index) {
         ListNode<E> current;
@@ -266,8 +267,11 @@ public class LinkedList<E> implements Serializable {
      * a node of the linked list
      */
     private static class ListNode<E> implements Serializable {
+        /** data        data stored in this node */
         public E data;         // data stored in this node
+        /** next        link to next node in the list */
         public ListNode<E> next;  // link to next node in the list
+        /** prev        link to the previous node in the list */
         public ListNode<E> prev;  // link to previous node in the list
 
         // post: constructs a node with given data and null links

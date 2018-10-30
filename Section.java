@@ -100,16 +100,7 @@ public class Section implements Serializable {
         }
         return paragraphs.get(index);
     }
-    
-    /**
-     * return the paragraphs in the section
-     * 
-     * @return              the paragraphs in the section
-     */
-    public LinkedList<Paragraph> getParagraphs() {
-        return paragraphs;
-    }
-    
+
     /**
      * remove a paragraph at the given index of the section
      * 
@@ -131,6 +122,8 @@ public class Section implements Serializable {
     
     /**
      * return the count of the paragraphs in the section
+     * 
+     * @return              the number of paragraphs in the section
      */
     public int getCount() {
         return paragraphs.size();

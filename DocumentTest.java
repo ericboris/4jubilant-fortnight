@@ -79,7 +79,7 @@ public class DocumentTest {
     public void testGetSections() {
         testD.addSection(new Section("section1"));
         testD.addSection(0, new Section("section2"));
-        assertEquals(2, testD.getSections().size());
+        assertEquals(2, testD.getCount());
     }
     
     @Test (expected = IndexOutOfBoundsException.class)
@@ -96,9 +96,9 @@ public class DocumentTest {
     public void testRemoveSection() {
         testD.addSection(new Section("section1"));
         testD.addSection(new Section("section2"));
-        assertEquals(2, testD.getSections().size());
+        assertEquals(2, testD.getCount());
         testD.remSection(0);
-        assertEquals(1, testD.getSections().size());
+        assertEquals(1, testD.getCount());
         assertEquals("section2", testD.getSection(0).getName());
     }
 
@@ -116,9 +116,9 @@ public class DocumentTest {
     public void testClear() {
         testD.addSection(new Section("section1"));
         testD.addSection(new Section("section2"));
-        assertEquals(2, testD.getSections().size());
+        assertEquals(2, testD.getCount());
         testD.clear();
-        assertEquals(0, testD.getSections().size());
+        assertEquals(0, testD.getCount());
     }
 
     @Test
@@ -177,7 +177,6 @@ public class DocumentTest {
         assertEquals("section1", testD.getSection(0).getName());
         testD.closeDoc();
         assertEquals(null, testD.getName());
-        assertEquals(null, testD.getSections());
     }
     
     @Test (expected = IllegalArgumentException.class)

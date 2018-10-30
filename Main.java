@@ -6,6 +6,11 @@
  * @version 10/26/18
  */
 public class Main {
+    /**
+     *  run the program
+     *  
+     *  @param  args        the optional commandline arguments
+     */
     public static void main(String[] args) {
         Document doc = Document.newDoc("Animals");
         

@@ -1,4 +1,4 @@
-import java.io.IOException;
+    import java.io.IOException;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
@@ -27,7 +27,7 @@ public class Document {
     private static boolean isOpen;
     /** DEFAULT_NAME    the default name of the document */
     public static final String DEFAULT_NAME = "";
-    
+
     /**
      * create a new document instance
      * 
@@ -120,15 +120,6 @@ public class Document {
     }
 
     /**
-     * return the sections in the document
-     * 
-     * @return              the sections in the document
-     */
-    public LinkedList<Section> getSections() {
-        return sections;
-    }
-
-    /**
      * remove a section at the given index of the document
      * 
      * @param   index       the location of the section to remove
@@ -149,11 +140,13 @@ public class Document {
 
     /**
      * return the count of the sections in the document
+     * 
+     * @return              the number of sections in the document
      */
     public int getCount() {
         return sections.size();
     }
-    
+
     /**
      * move the section located at index the number of times in direction
      * 
@@ -162,12 +155,12 @@ public class Document {
      */
     public void move(int index, int direction) {
         if (index < 0 || index > sections.size() ||
-            index + direction < 0 || index + direction > sections.size()) {
+        index + direction < 0 || index + direction > sections.size()) {
             throw new IndexOutOfBoundsException("index: " + index);
         }
         sections.move(index, direction);
     }
-    
+
     /**
      * open a new document
      * 
@@ -190,6 +183,7 @@ public class Document {
      * @param   name        the name of the document to open
      * @return              the document
      */
+    // @SuppressWarnings("unchecked") 
     public static Document openDoc(String name) {
         if (isOpen) {
             throw new IllegalArgumentException("document is already open");
@@ -200,7 +194,7 @@ public class Document {
         try {
             FileInputStream fis = new FileInputStream("docs/" + name + ".wpd");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            instance = getInstance(name, (LinkedList<Section>) ois.readObject());
+            instance = (Document) getInstance(name, (LinkedList<Section>) ois.readObject());
             ois.close();
             fis.close();
         } catch (ClassNotFoundException | IOException e) {
@@ -258,21 +252,21 @@ public class Document {
                     case CENTER: sb.append("\n\t\t<p align=\"center\">" + para.getText() + "</p>");
                     break;
                     case BULLET: 
-                        sb.append("\n\t\t<ul>"); 
-                        String[] ulSplit = para.getText().split("\n");
-                        for (String li : ulSplit) {
-                            sb.append("\n\t\t\t<li>" + li + "</li>");
-                        }
-                        sb.append("</ul>");
-                        break;
+                    sb.append("\n\t\t<ul>"); 
+                    String[] ulSplit = para.getText().split("\n");
+                    for (String li : ulSplit) {
+                        sb.append("\n\t\t\t<li>" + li + "</li>");
+                    }
+                    sb.append("</ul>");
+                    break;
                     case NUMBERED:
-                        sb.append("\n\t\t<ol>"); 
-                        String[] olSplit = para.getText().split("\n");
-                        for (String li : olSplit) {
-                            sb.append("\n\t\t\t<li>" + li + "</li>");
-                        }
-                        sb.append("</ol>");
-                        break;
+                    sb.append("\n\t\t<ol>"); 
+                    String[] olSplit = para.getText().split("\n");
+                    for (String li : olSplit) {
+                        sb.append("\n\t\t\t<li>" + li + "</li>");
+                    }
+                    sb.append("</ol>");
+                    break;
                 }
             }
             sb.append("\n\t\t</section>");
@@ -307,7 +301,7 @@ public class Document {
         instance = null;
         isOpen = false;
     }   
-    
+
     /**
      * return a string form of the document
      * 
@@ -319,8 +313,8 @@ public class Document {
             sects += getSection(s).toString() + "\t";
         }
         return "name :\n\t" + name + 
-               "\ncount :\n\t" + getCount() +
-               "\nsections : \n\t" + sects;
-               
+        "\ncount :\n\t" + getCount() +
+        "\nsections : \n\t" + sects;
+
     }
 }

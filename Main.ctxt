@@ -3,4 +3,5 @@ comment0.target=Main
 comment0.text=\n\ Demonstrate\ the\ functionality\ of\ Document\n\n\ @author\ Eric\ Boris\n\ @version\ 10/26/18\n
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
+comment1.text=\n\ \ run\ the\ program\n\ \ \n\ \ @param\ \ args\ \ \ \ \ \ \ \ the\ optional\ commandline\ arguments\n
 numComments=2

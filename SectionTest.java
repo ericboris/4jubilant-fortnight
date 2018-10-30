@@ -38,21 +38,18 @@ public class SectionTest {
     public void testDefaultConstructor() {
         Section testS = new Section();
         assertEquals(Section.DEFAULT_NAME, testS.getName());
-        assertTrue(testS.getParagraphs() instanceof LinkedList);
     }
 
     @Test
     public void testSingleConstructor() {
         Section testS = new Section("name");
-        assertEquals("name", testS.getName());
-        assertTrue(testS.getParagraphs() instanceof LinkedList);
+        assertEquals("name", testS.getName());;
     }
 
     @Test
     public void testFullConstructor() {
         Section testS = new Section("name", new LinkedList<Paragraph>());
         assertEquals("name", testS.getName());
-        assertTrue(testS.getParagraphs() instanceof LinkedList);
     }
 
     @Test
@@ -74,24 +71,24 @@ public class SectionTest {
     public void testAddGetRemoveParagraphs() {
         // create a new section and check that there are no paragraphs
         Section testS = new Section();
-        assertEquals(0, testS.getParagraphs().size());
+        assertEquals(0, testS.getCount());
         
         // add three paragraphs and check the new size
         testS.addParagraph(new Paragraph("text 1", Style.LEFT));
         testS.addParagraph(new Paragraph("text 2", Style.CENTER));
         testS.addParagraph(new Paragraph("text 3", Style.RIGHT));
-        assertEquals(3, testS.getParagraphs().size());
+        assertEquals(3, testS.getCount());
         
         // check each element and remove it after checkingk
-        assertEquals("text 3", testS.getParagraph(0).getText());
-        assertEquals(Style.RIGHT, testS.getParagraph(0).getStyle());
+        assertEquals("text 1", testS.getParagraph(0).getText());
+        assertEquals(Style.LEFT, testS.getParagraph(0).getStyle());
         testS.remParagraph(0);
-        assertEquals(2, testS.getParagraphs().size());
+        assertEquals(2, testS.getCount());
         assertEquals("text 2", testS.getParagraph(0).getText());
         assertEquals(Style.CENTER, testS.getParagraph(0).getStyle());
         testS.remParagraph(0);
-        assertEquals("text 1", testS.getParagraph(0).getText());
-        assertEquals(Style.LEFT, testS.getParagraph(0).getStyle());
+        assertEquals("text 3", testS.getParagraph(0).getText());
+        assertEquals(Style.RIGHT, testS.getParagraph(0).getStyle());
     }
     
     @Test
